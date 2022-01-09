@@ -10,7 +10,7 @@ import { HistoricalActionsComponent } from './components/historical-actions/hist
 import { KeyMetricsComponent } from './components/key-metrics/key-metrics.component';
 import { NavigationBarComponent } from './components/navigation-bar/navigation-bar.component';
 import { SpinnerComponent } from './components/spinner/spinner.component';
-import { SpinnerService } from './services/spinner.service';
+
 
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatListModule } from '@angular/material/list';
@@ -45,6 +45,10 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatNativeDateModule } from '@angular/material/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { SpinnerService } from './services/spinner/spinner.service';
+import { TradeService } from './services/trade/trade.service';
+import { TradingModelService } from './services/trading-model/trading-model.service';
+import { CommodityService } from './services/commodity/commodity.service';
 
 
 @NgModule({
@@ -95,7 +99,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     FlexLayoutModule,
     NgxChartsModule
   ],
-  providers: [SpinnerService],
+  providers: [SpinnerService, TradeService, TradingModelService, CommodityService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

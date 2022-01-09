@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { SpinnerService } from 'src/app/services/spinner/spinner.service';
 
-import { SpinnerService, SpinnerState } from 'src/app/services/spinner.service';
 
 
 @Component({

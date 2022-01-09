@@ -1,1 +1,27 @@
-<p>historical-actions works!</p>
+<div>
+    <table mat-table [dataSource]="dataSource" matSort>
+
+        <ng-container matColumnDef="tradingModel">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Model </th>
+            <td mat-cell *matCellDef="let row"> {{row.model.Name}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="commodity">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Commodity </th>
+            <td mat-cell *matCellDef="let row"> {{row.commodity.Name}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="newTradeAction">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> New Trade Action </th>
+            <td mat-cell *matCellDef="let row"> {{row.newTradeAction}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+
+ 
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of actions"></mat-paginator>
+</div>

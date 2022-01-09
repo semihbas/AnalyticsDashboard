@@ -9,71 +9,34 @@ import { Component, OnInit } from '@angular/core';
 export class KeyMetricsComponent implements OnInit {
   multi = [
     {
-      "name": "Germany",
+      "name": "Model 1",
       "series": [
         {
-          "name": "1990",
-          "value": 62000000
+          "name": new Date("01/01/2018"),
+          "value": 0
         },
         {
-          "name": "2010",
-          "value": 73000000
+          "name": new Date("02/01/2018"),
+          "value": 31495.72
         },
         {
-          "name": "2011",
-          "value": 89400000
+          "name": new Date("03/01/2018"),
+          "value": 31346.34
+        },
+        {
+          "name": new Date("04/01/2018"),
+          "value": 31295.87
+        },
+        {
+          "name": "05/01/2018",
+          "value": 31432.13
         }
       ]
     },
+
   
-    {
-      "name": "USA",
-      "series": [
-        {
-          "name": "1990",
-          "value": 250000000
-        },
-        {
-          "name": "2010",
-          "value": 309000000
-        },
-        {
-          "name": "2011",
-          "value": 311000000
-        }
-      ]
-    },
-  
-    {
-      "name": "France",
-      "series": [
-        {
-          "name": "1990",
-          "value": 58000000
-        },
-        {
-          "name": "2010",
-          "value": 50000020
-        },
-        {
-          "name": "2011",
-          "value": 58000000
-        }
-      ]
-    },
-    {
-      "name": "UK",
-      "series": [
-        {
-          "name": "1990",
-          "value": 57000000
-        },
-        {
-          "name": "2010",
-          "value": 62000000
-        }
-      ]
-    }
+    
+    
   ];
   
 
@@ -86,8 +49,8 @@ export class KeyMetricsComponent implements OnInit {
   yAxis: boolean = true;
   showYAxisLabel: boolean = true;
   showXAxisLabel: boolean = true;
-  xAxisLabel: string = 'Year';
-  yAxisLabel: string = 'Population';
+  xAxisLabel: string = 'Date';
+  yAxisLabel: string = 'Price';
   timeline: boolean = true;
 
   colorScheme = {
