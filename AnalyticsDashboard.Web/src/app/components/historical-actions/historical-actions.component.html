@@ -1,3 +1,30 @@
+<mat-card>
+
+
+    <div fxLayout="row" fxLayoutAlign="left" fxLayoutGap="10px">
+        <mat-form-field fxFlex="20">
+            <mat-label>Select Model</mat-label>
+            <mat-select [(value)]="selectedTradingModel">
+                <mat-option *ngFor="let tradingModel of this.tradingModels" value="{{tradingModel.Id}}">
+                    {{tradingModel.Name}} </mat-option>
+
+            </mat-select>
+        </mat-form-field>
+
+
+
+        <mat-form-field fxFlex="20">
+            <mat-label>Select Commodity</mat-label>
+            <mat-select [(value)]="selectedCommodity">
+                <mat-option *ngFor="let commodity of this.commodities" value="{{commodity.Id}}"> {{commodity.Name}}
+                </mat-option>
+
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+</mat-card>
+
 <div>
     <table mat-table [dataSource]="dataSource" matSort>
 
@@ -20,7 +47,7 @@
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
 
- 
+
     </table>
 
     <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of actions"></mat-paginator>
