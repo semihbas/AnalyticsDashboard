@@ -1,1 +1,218 @@
-/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/theming";
+@include mat-core();
+
+$app-primary: mat-palette($mat-indigo, 700);
+$app-accent: mat-palette($mat-red);
+$app-warn: mat-palette($mat-orange);
+
+$app-theme: mat-light-theme(
+  $app-primary,
+  $app-accent,
+  $app-warn
+);
+
+@include angular-material-theme($app-theme);
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Helvetica, Roboto, Arial, sans-serif;
+}
+
+a {
+  cursor: pointer;
+}
+li {
+  cursor: pointer;
+}
+
+.popover-content {
+  color: black !important;
+}
+
+.highlight {
+  background-color: rgba(255, 0, 0, 0.15) !important;
+}
+
+.fill-remaining-space {
+  flex: 1 1 auto;
+}
+
+.mat-list-item-content {
+  padding: 0 4px !important;
+}
+
+.mat-card {
+  margin: 2px;
+}
+
+.hint {
+  font-size: 0.8rem !important;
+  opacity: 0.5;
+}
+
+.float-right {
+  margin-left: auto;
+  float: right;
+}
+.mat-tab-label {
+  padding: 0 16px !important;
+  min-width: 0px !important;
+}
+
+.fit-page {
+  min-height: calc(100vh - 100px) !important;
+}
+
+.full-page {
+  height: calc(100vh - 135px) !important;
+  //  max-height: calc(100vh-64px) !important; 
+  overflow: hidden !important;
+}
+
+.full-page2 {
+  height: calc(100vh - 96px) !important;
+  /* max-height: calc(100vh-64px) !important; */
+  overflow: hidden !important;
+}
+
+.popup {
+  padding: 1rem;
+}
+
+.ps__rail-y {
+  z-index: 99999;
+}
+
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+mat-spinner {
+  top: 45%;
+  left: 48%;
+  z-index: 120;
+}
+
+.spinner-wrapper {
+  display: none;
+  position: fixed;
+  top: 64px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.05);
+  z-index: 100;
+}
+
+.spinner-wrapper.active {
+  display: block !important;
+}
+
+.spinner-overlay .mat-progress-spinner {
+  position: relative;
+  top: 40%;
+}
+
+.mat-table {
+  overflow: auto;
+}
+
+.align-table .mat-table {
+  display: table;
+  width: 100%;
+}
+
+.align-table .mat-header-row,
+.align-table .mat-row {
+  display: table-row;
+  padding: 0;
+  border: none;
+}
+
+.align-table .mat-header-cell,
+.align-table .mat-cell {
+  display: table-cell;
+  height: 48px;
+  vertical-align: middle;
+  padding: 0 8px;
+
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.fill-column {
+  width: 100%;
+}
+
+.mat-list-item-content {
+  height: 44pt !important;
+}
+
+p.capitalize {
+  text-transform: capitalize;
+}
+
+.fixedInput {
+  width: 60px !important;
+}
+
+.error-dialog .mat-dialog-container {
+  width: 500px;
+
+  .header-dialog {
+    display: inline-block;
+  }
+
+  img, h1 {
+    float: left;
+  }
+
+  img { 
+    height: 25px; 
+    width: 25px;
+    margin-right: 10px;
+  }
+
+  .errors-dialog {
+    max-height: 200px;
+    overflow-y: scroll;
+  }
+
+  .error {
+    word-break: break-all;
+    margin: 5px 0;
+
+    &.divider {
+      border-bottom: 1px solid lightgray;
+    }
+  }
+
+  .actions-dialog {
+    display: inline-block;
+    width: 100%;
+    margin-top: 10px;
+    border: none;
+
+    button.action-dialog {
+      float: right;
+      min-width: 100px;
+      padding: 5px 10px;
+      border: 1px solid lightgray;
+      border-radius: 3px;
+      margin-left: 10px;
+    }
+
+    .action-dialog:hover {
+      cursor: pointer;
+      background-color: lightgray;
+    }
+    .action-dialog:focus {
+      outline: none;
+    }
+  }
+}

@@ -7,4 +7,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'AnalyticsDashboard.Web';
+
+  getYear() {
+    return new Date().getUTCFullYear();
+  }
 }

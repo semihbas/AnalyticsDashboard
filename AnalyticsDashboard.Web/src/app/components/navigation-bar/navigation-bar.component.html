@@ -1,0 +1,20 @@
+<mat-toolbar flex layout-fill color="primary">
+    <a routerLink="/">
+      <span class="logo" alt="Analytics Dashboard">&nbsp;</span>
+    </a>
+  
+    <button mat-button class="nav-menu" routerLink="/">Key Metrics</button>
+    <button mat-button class="nav-menu" routerLink="historical-trend">Historical Trend</button>
+    <button mat-button class="nav-menu" routerLink="historical-actions">Historical Actions</button>
+  
+    <span class="fill-remaining-space"></span>
+
+    <button mat-button [matMenuTriggerFor]="menu1">{{userName}}
+      <mat-icon>arrow_drop_down</mat-icon>
+    </button>
+    <mat-menu #menu1="matMenu">
+      <button   mat-menu-item>Logout</button>  
+    </mat-menu>
+  
+  </mat-toolbar>
+  
