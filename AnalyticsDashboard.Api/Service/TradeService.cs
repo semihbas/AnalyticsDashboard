@@ -9,16 +9,21 @@ namespace AnalyticsDashboard.Api.Service
 {
     public class TradeService :ITradeService
     {
-        private readonly ITradeRepository _TradeRepository;
-        public TradeService(ITradeRepository TradeRepository)
+        private readonly ITradeRepository _tradeRepository;
+        public TradeService(ITradeRepository tradeRepository)
         {
-            _TradeRepository = TradeRepository;
+            _tradeRepository = tradeRepository;
         }
 
-        public async Task<List<Trade>> Get(int skip, int take)
+        public async Task<IEnumerable<Trade>> Get(int skip, int take)
         {
-            return await _TradeRepository.Get(skip, take);
+            return await _tradeRepository.Get(skip, take);
 
+        }
+
+        public async Task<IEnumerable<Trade>> Get(int skip, int take, int? commodityId, int? tradingModelId)
+        {
+            return await _tradeRepository.Get(skip, take,commodityId, tradingModelId );
         }
     }
 }

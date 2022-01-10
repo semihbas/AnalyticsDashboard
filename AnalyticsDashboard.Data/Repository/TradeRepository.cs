@@ -27,6 +27,29 @@ namespace AnalyticsDashboard.Data.Repository
                 .Take(take)
                 .ToListAsync();
             }
+
+        public async Task<IEnumerable<Trade>> Get(int skip, int take, int? commodityId, int? tradingModelId)
+        {
+            var query= _entity.AsNoTracking();
+
+            if (commodityId!= null)
+            {
+                query.Where(x=>x.CommodityId == commodityId);
+            }
+
+            if (tradingModelId != null)
+            {
+                query.Where(x => x.TradingModelId == tradingModelId);
+            }
+
+            return await query
+              .Include(x => x.TradingModel)
+              .Include(x => x.Commodity)
+              .OrderByDescending(x => x.Id)
+              .Skip((skip - 1) * take)
+              .Take(take)
+              .ToListAsync();
         }
+    }
     
 }

@@ -16,9 +16,9 @@ namespace AnalyticsDashboard.Api.Service
             _tradingModelRepository = tradingModelRepository;
         }
 
-        public Task<List<TradingModel>> GetAll()
+        public async Task<IEnumerable<TradingModel>> GetAll()
         {
-            return _tradingModelRepository.GetAll();
+            return await _tradingModelRepository.GetAll();
         }
     }
 }

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AnalyticsDashboard.Api.Service.Interface;
+using AnalyticsDashboard.Data.Entity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -13,17 +15,18 @@ namespace AnalyticsDashboard.Api.Controllers
     {
 
         private readonly ILogger<TradingModelController> _logger;
+        private readonly ITradingModelService _tradingModelService;
 
-        public TradingModelController(ILogger<TradingModelController> logger)
+        public TradingModelController(ILogger<TradingModelController> logger, ITradingModelService tradingModelService)
         {
             _logger = logger;
+            _tradingModelService = tradingModelService;
         }
 
-        // GET: api/values
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<IEnumerable<TradingModel>> Get()
         {
-            return new string[] { "value1", "value2" };
+            return await _tradingModelService.GetAll();
         }
 
     }

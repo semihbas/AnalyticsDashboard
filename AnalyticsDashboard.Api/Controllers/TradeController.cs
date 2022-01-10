@@ -31,9 +31,9 @@ namespace AnalyticsDashboard.Api.Controllers
 
 
         [HttpGet("GetByFilter")]
-        public IEnumerable<string> GetByFilter(int? commodityId, int? tradingModelId)
+        public async Task<IEnumerable<Trade>> GetByFilter(int skip, int take,int? commodityId, int? tradingModelId)
         {
-            return new string[] { "value1", "value2" };
+            return await _tradeService.Get(skip, take,commodityId, tradingModelId);
         }
 
     }

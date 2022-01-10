@@ -15,7 +15,7 @@ namespace AnalyticsDashboard.Api.Service
             _commodityRepository = commodityRepository;
         }
 
-        public async Task<List<Commodity>> GetAll()
+        public async Task<IEnumerable<Commodity>> GetAll()
         {
             return await _commodityRepository.GetAll();
 
