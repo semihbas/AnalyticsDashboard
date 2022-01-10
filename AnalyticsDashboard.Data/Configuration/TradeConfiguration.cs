@@ -5,9 +5,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace AnalyticsDashboard.Data.Configuration
 {
-    public class CommodityConfiguration : IEntityTypeConfiguration<Commodity>
+    public class TradeConfiguration : IEntityTypeConfiguration<Trade>
     {
-        public void Configure(EntityTypeBuilder<Commodity> builder)
+        public void Configure(EntityTypeBuilder<Trade> builder)
         {
             builder.HasKey(c => c.Id);
         }

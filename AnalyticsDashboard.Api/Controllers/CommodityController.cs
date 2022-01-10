@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AnalyticsDashboard.Api.Service.Interface;
+using AnalyticsDashboard.Data.Entity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -12,18 +14,21 @@ namespace AnalyticsDashboard.Api.Controllers
     {
 
         private readonly ILogger<CommodityController> _logger;
+        private readonly ICommodityService _commodityService;
 
-        public CommodityController(ILogger<CommodityController> logger)
+        public CommodityController(ILogger<CommodityController> logger, ICommodityService commodityService)
         {
             _logger = logger;
+       _commodityService = commodityService;
         }
 
-        // GET: api/values
+
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<IEnumerable<Commodity>> Get()
         {
-            return new string[] { "value1", "value2" };
+            return await this._commodityService.GetAll();
         }
 
+      
     }
 }

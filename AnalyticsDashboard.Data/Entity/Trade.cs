@@ -1,7 +1,7 @@
 ﻿using System;
 namespace AnalyticsDashboard.Data.Entity
 {
-    public class Trade
+    public class Trade : IEntity
     {
         public int Id { get; set; }
 
@@ -20,5 +20,8 @@ namespace AnalyticsDashboard.Data.Entity
         public int NewTradeAction { get; set; }
 
         public decimal PnLDaily { get; set; }
+
+        public virtual TradingModel TradingModel { get; set; }
+        public virtual Commodity Commodity { get; set; }
     }
 }

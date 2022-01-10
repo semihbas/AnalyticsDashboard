@@ -2,7 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AnalyticsDashboard.Api.Service;
+using AnalyticsDashboard.Api.Service.Interface;
 using AnalyticsDashboard.Data;
+using AnalyticsDashboard.Data.Repository.Interface;
+using AnalyticsDashboard.Data.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -28,11 +32,8 @@ namespace AnalyticsDashboard.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<AnalyticsDashboardDbContext>(options =>
-       options.UseSqlServer(
-       Configuration.GetConnectionString("DefaultConnection"),
-       ef => ef.MigrationsAssembly(typeof(AnalyticsDashboardDbContext).Assembly.FullName)));
-            services.AddScoped<IAnalyticsDashboardDbContext>(provider => provider.GetService<AnalyticsDashboardDbContext>());
+       
+            services.AddDbContext<AnalyticsDashboardDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
 
             services.AddControllers();
@@ -52,6 +53,18 @@ namespace AnalyticsDashboard.Api
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Analytics Dashboard Api", Version = "v1" });
             });
+
+            services.AddLogging();
+
+            services.AddTransient(sp => sp);
+            services.AddScoped<ICommodityService, CommodityService>();
+            services.AddScoped<ICommodityRepository, CommodityRepository>();
+
+            services.AddScoped<ITradeService, TradeService>();
+            services.AddScoped<ITradeRepository, TradeRepository>();
+
+            services.AddScoped<ITradingModelService, TradingModelService>();
+            services.AddScoped<ITradingModelRepository, TradingModelRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
