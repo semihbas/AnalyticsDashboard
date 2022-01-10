@@ -49,6 +49,7 @@ import { SpinnerService } from './services/spinner/spinner.service';
 import { TradeService } from './services/trade/trade.service';
 import { TradingModelService } from './services/trading-model/trading-model.service';
 import { CommodityService } from './services/commodity/commodity.service';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -65,6 +66,7 @@ import { CommodityService } from './services/commodity/commodity.service';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     MatFormFieldModule,
     MatListModule,
     MatRadioModule,

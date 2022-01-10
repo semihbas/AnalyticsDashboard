@@ -1,11 +1,11 @@
 export interface TradeResponse {
-    Id: number;
-    TradingModelId: number;
-    CommodityId: number;
-    Date: Date;
-    Contract: string;
-    Price: number;
-    Position: number;
-    NewTradeAction: number;
-    PnLDaily: number;
+    id: number;
+    tradingModelId: number;
+    commodityId: number;
+    date: Date;
+    contract: string;
+    price: number;
+    position: number;
+    newTradeAction: number;
+    pnLDaily: number;
 }

@@ -38,16 +38,16 @@ namespace AnalyticsDashboard.Api
 
             services.AddControllers();
 
-            services.AddCors(options =>
-            {
-                options.AddPolicy("CorsPolicy",
-                    builder => builder
-                    .WithOrigins("https://localhost:3000", "http://localhost:5000", "https://localhost:5001", "http://localhost:3000")
-                    .AllowAnyMethod()
-                    .AllowAnyHeader()
-                    .AllowCredentials()
-                     );
-            });
+            //services.AddCors(options =>
+            //{
+            //    options.AddPolicy("CorsPolicy",
+            //        builder => builder
+            //        .WithOrigins("https://localhost:3000", "http://localhost:5000", "https://localhost:5001", "http://localhost:3000", "https://localhost:4200", "http://localhost:4200")
+            //        .AllowAnyMethod()
+            //        .AllowAnyHeader()
+            //        .AllowCredentials()
+            //         );
+            //});
 
             services.AddSwaggerGen(c =>
             {
@@ -79,7 +79,10 @@ namespace AnalyticsDashboard.Api
             app.UseSwaggerUI();
             app.UseHttpsRedirection();
 
-            app.UseCors("CorsPolicy");
+            // app.UseCors("CorsPolicy");
+
+            app.UseCors(configurePolicy => configurePolicy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+
 
             app.UseRouting();
 

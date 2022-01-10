@@ -5,8 +5,8 @@
         <mat-form-field fxFlex="20">
             <mat-label>Select Model</mat-label>
             <mat-select [(value)]="selectedTradingModel">
-                <mat-option *ngFor="let tradingModel of this.tradingModels" value="{{tradingModel.Id}}">
-                    {{tradingModel.Name}} </mat-option>
+                <mat-option *ngFor="let tradingModel of this.tradingModels" value="{{tradingModel.id}}">
+                    {{tradingModel.name}} </mat-option>
 
             </mat-select>
         </mat-form-field>
@@ -16,7 +16,7 @@
         <mat-form-field fxFlex="20">
             <mat-label>Select Commodity</mat-label>
             <mat-select [(value)]="selectedCommodity">
-                <mat-option *ngFor="let commodity of this.commodities" value="{{commodity.Id}}"> {{commodity.Name}}
+                <mat-option *ngFor="let commodity of this.commodities" value="{{commodity.id}}"> {{commodity.name}}
                 </mat-option>
 
             </mat-select>
@@ -30,12 +30,12 @@
 
         <ng-container matColumnDef="tradingModel">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Model </th>
-            <td mat-cell *matCellDef="let row"> {{row.model.Name}} </td>
+            <td mat-cell *matCellDef="let row"> {{row.tradingModel.name}} </td>
         </ng-container>
 
         <ng-container matColumnDef="commodity">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Commodity </th>
-            <td mat-cell *matCellDef="let row"> {{row.commodity.Name}} </td>
+            <td mat-cell *matCellDef="let row"> {{row.commodity.name}} </td>
         </ng-container>
 
         <ng-container matColumnDef="newTradeAction">
@@ -45,8 +45,6 @@
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-
-
 
     </table>
 

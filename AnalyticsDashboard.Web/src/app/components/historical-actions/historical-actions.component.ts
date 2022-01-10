@@ -6,6 +6,7 @@ import { CommodityResponse } from 'src/app/models/commodityResponse';
 import { TradeResponse } from 'src/app/models/tradeResponse';
 import { TradingModelResponse } from 'src/app/models/tradingModelResponse';
 import { CommodityService } from 'src/app/services/commodity/commodity.service';
+import { TradeService } from 'src/app/services/trade/trade.service';
 import { TradingModelService } from 'src/app/services/trading-model/trading-model.service';
 
 @Component({
@@ -26,19 +27,32 @@ export class HistoricalActionsComponent implements OnInit, AfterViewInit {
   selectedCommodity: CommodityResponse;
   selectedTradingModel: TradingModelService;
 
-  constructor() { }
+  constructor(private tradeService: TradeService,
+    private commodityService: CommodityService,
+    private tradingModelService: TradingModelService) { }
 
   ngOnInit(): void {
 
+    this.commodityService.get().subscribe(response => {
+      this.commodities= response;
+    });
+
+    this.tradingModelService.get().subscribe(response => {
+      this.tradingModels= response;
+    });
 
 
-    this.dataSource = new MatTableDataSource();
+    this.tradeService.get(1, 50, null, null).subscribe(response => {
+      this.dataSource = new MatTableDataSource(response);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    });
+
+
 
   }
 
   ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
   }
 
 }
