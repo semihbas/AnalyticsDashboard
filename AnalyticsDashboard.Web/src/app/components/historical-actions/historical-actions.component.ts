@@ -24,8 +24,8 @@ export class HistoricalActionsComponent implements OnInit, AfterViewInit {
   commodities: CommodityResponse[] = [];
 
 
-  selectedCommodity: CommodityResponse;
-  selectedTradingModel: TradingModelService;
+  selectedCommodityId: number;
+  selectedTradingModelId: number;
 
   constructor(private tradeService: TradeService,
     private commodityService: CommodityService,
@@ -41,15 +41,23 @@ export class HistoricalActionsComponent implements OnInit, AfterViewInit {
       this.tradingModels= response;
     });
 
+  }
+  commodityItemSelected(){
 
-    this.tradeService.get(1, 50, null, null).subscribe(response => {
+    this.loadHistoricalActions();
+
+  }
+
+  private loadHistoricalActions() {
+    this.tradeService.get(1, 50, this.selectedCommodityId, this.selectedTradingModelId).subscribe(response => {
       this.dataSource = new MatTableDataSource(response);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     });
+  }
 
-
-
+  tradingModelItemSelected(){
+    this.loadHistoricalActions();
   }
 
   ngAfterViewInit() {

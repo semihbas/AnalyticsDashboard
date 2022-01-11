@@ -4,9 +4,9 @@
     <div fxLayout="row" fxLayoutAlign="left" fxLayoutGap="10px">
         <mat-form-field fxFlex="20">
             <mat-label>Select Model</mat-label>
-            <mat-select [(value)]="selectedTradingModel">
-                <mat-option *ngFor="let tradingModel of this.tradingModels" value="{{tradingModel.id}}">
-                    {{tradingModel.name}} </mat-option>
+            <mat-select [(value)]="selectedTradingModelId">
+                <mat-option *ngFor="let tradingModel of this.tradingModels" value="{{tradingModel.id}}" 
+                (click)="tradingModelItemSelected()">{{tradingModel.name}}</mat-option>
 
             </mat-select>
         </mat-form-field>
@@ -15,8 +15,9 @@
 
         <mat-form-field fxFlex="20">
             <mat-label>Select Commodity</mat-label>
-            <mat-select [(value)]="selectedCommodity">
-                <mat-option *ngFor="let commodity of this.commodities" value="{{commodity.id}}"> {{commodity.name}}
+            <mat-select [(value)]="selectedCommodityId">
+                <mat-option *ngFor="let commodity of this.commodities" value="{{commodity.id}}" 
+                 (click)="commodityItemSelected()"> {{commodity.name}}
                 </mat-option>
 
             </mat-select>
