@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AnalyticsDashboard.Api.Service.Interface;
 using AnalyticsDashboard.Data.Entity;
+using AnalyticsDashboard.Data.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -34,6 +35,13 @@ namespace AnalyticsDashboard.Api.Controllers
         public async Task<IEnumerable<Trade>> GetByFilter(int skip, int take,int? commodityId, int? tradingModelId)
         {
             return await _tradeService.Get(skip, take,commodityId, tradingModelId);
+        }
+
+        [HttpGet("GetChartSourceByCommodity")]
+        public async Task<IEnumerable<ChartSource>> GetChartSourceByCommodity(int commodityId)
+        {
+          return await _tradeService.Get(commodityId);
+           
         }
 
     }

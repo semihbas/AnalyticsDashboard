@@ -1,4 +1,23 @@
+<mat-card>
+
+
+  <div fxLayout="row" fxLayoutAlign="left" fxLayoutGap="10px">
+     
+      <mat-form-field fxFlex="20">
+          <mat-label>Select Commodity</mat-label>
+          <mat-select [(value)]="selectedCommodityId">
+              <mat-option *ngFor="let commodity of this.commodities" value="{{commodity.id}}"  (click)="commodityItemSelected(commodity.id)"> {{commodity.name}}
+              </mat-option>
+
+          </mat-select>
+      </mat-form-field>
+  </div>
+
+</mat-card>
+
+
 <ngx-charts-line-chart
+[view] ="[2000,1000]"
   [legend]="legend"
   [showXAxisLabel]="showXAxisLabel"
   [showYAxisLabel]="showYAxisLabel"
@@ -7,5 +26,5 @@
   [xAxisLabel]="xAxisLabel"
   [yAxisLabel]="yAxisLabel"
   [timeline]="timeline"
-  [results]="multi"
+  [results]="chartSource"
 ></ngx-charts-line-chart>

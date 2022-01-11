@@ -28,6 +28,18 @@ namespace AnalyticsDashboard.Data.Repository
                 .ToListAsync();
             }
 
+
+        public async Task<IEnumerable<Trade>> Get(int commodityId)
+        {
+            return await _entity
+                .Where(x=>x.CommodityId== commodityId)
+              .Include(x => x.TradingModel)
+              .Include(x => x.Commodity)
+              .OrderByDescending(x => x.Id)         
+              .ToListAsync();
+
+        }
+
         public async Task<IEnumerable<Trade>> Get(int skip, int take, int? commodityId, int? tradingModelId)
         {
             var query= _entity.AsNoTracking();

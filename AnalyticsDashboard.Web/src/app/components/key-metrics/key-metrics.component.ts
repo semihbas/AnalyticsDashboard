@@ -1,4 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { TradeService } from 'src/app/services/trade/trade.service';
+import { Observable } from 'rxjs';
+import { TradeResponse } from 'src/app/models/tradeResponse';
+import { ChartSourceResponse } from 'src/app/models/chartSourceResponse';
+import { CommodityService } from 'src/app/services/commodity/commodity.service';
+import { CommodityResponse } from 'src/app/models/commodityResponse';
 
 @Component({
   selector: 'app-key-metrics',
@@ -7,39 +13,10 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class KeyMetricsComponent implements OnInit {
-  multi = [
-    {
-      "name": "Model 1",
-      "series": [
-        {
-          "name": new Date("01/01/2018"),
-          "value": 0
-        },
-        {
-          "name": new Date("02/01/2018"),
-          "value": 31495.72
-        },
-        {
-          "name": new Date("03/01/2018"),
-          "value": 31346.34
-        },
-        {
-          "name": new Date("04/01/2018"),
-          "value": 31295.87
-        },
-        {
-          "name": "05/01/2018",
-          "value": 31432.13
-        }
-      ]
-    },
+  chartSource: any;
 
-  
-    
-    
-  ];
-  
-
+  commodities: CommodityResponse[] = [];
+  selectedCommodityId: number;
 
   // options
   legend: boolean = true;
@@ -57,11 +34,23 @@ export class KeyMetricsComponent implements OnInit {
     domain: ['#5AA454', '#E44D25', '#CFC0BB', '#7aa3e5', '#a8385d', '#aae3f5']
   };
 
-  constructor() {
+  constructor(private tradeService: TradeService
+    , private commodityService: CommodityService) {
   }
 
   
   ngOnInit(): void {
+    this.commodityService.get().subscribe(response => {
+      this.commodities= response;
+      this.selectedCommodityId= this.commodities[0].id;   
+    });
+
+  }
+
+  commodityItemSelected(commodityId : number){
+    this.tradeService.GetChartSourceByCommodity(commodityId).subscribe((response: ChartSourceResponse[] )=> {
+      this.chartSource = response;
+    });
   }
 
 }

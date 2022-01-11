@@ -15,6 +15,7 @@
     <None Remove="Microsoft.EntityFrameworkCore.InMemory" />
     <None Remove="Configuration\" />
     <None Remove="Entity\Interface\" />
+    <None Remove="Model\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Entity\" />
@@ -22,6 +23,7 @@
     <Folder Include="Repository\Interface\" />
     <Folder Include="Configuration\" />
     <Folder Include="Entity\Interface\" />
+    <Folder Include="Model\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.22">

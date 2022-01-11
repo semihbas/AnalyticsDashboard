@@ -1,3 +1,6 @@
+import { CommodityResponse } from "./commodityResponse";
+import { TradingModelResponse } from "./tradingModelResponse";
+
 export interface TradeResponse {
     id: number;
     tradingModelId: number;
@@ -8,4 +11,6 @@ export interface TradeResponse {
     position: number;
     newTradeAction: number;
     pnLDaily: number;
+    commodity: CommodityResponse;
+    tradingModel: TradingModelResponse;
 }
