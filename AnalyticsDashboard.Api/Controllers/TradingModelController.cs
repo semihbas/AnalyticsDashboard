@@ -24,7 +24,7 @@ namespace AnalyticsDashboard.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<TradingModel>> Get()
+        public async Task<IEnumerable<TradingModelResponse>> Get()
         {
             return await _tradingModelService.GetAll();
         }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AnalyticsDashboard.Api.Models;
 using AnalyticsDashboard.Api.Service.Interface;
 using AnalyticsDashboard.Data.Entity;
 using AnalyticsDashboard.Data.Model;
@@ -10,7 +11,7 @@ using Microsoft.Extensions.Logging;
 
 namespace AnalyticsDashboard.Api.Controllers
 {
-    [Route("api/[controller]")]
+       [Route("api/[controller]")]
         public class TradeController : Controller
         {
 
@@ -20,10 +21,10 @@ namespace AnalyticsDashboard.Api.Controllers
         public TradeController(ILogger<TradeController> logger, ITradeService tradeService)
         {
                 _logger = logger;
-        _tradeService = tradeService;
+                _tradeService = tradeService;
         }
         [HttpGet("GetByFilter")]
-        public async Task<IEnumerable<Trade>> GetByFilter(int? commodityId, int? tradingModelId)
+        public async Task<IEnumerable<TradeResponse>> GetByFilter(int? commodityId, int? tradingModelId)
         {
             return await _tradeService.Get(commodityId, tradingModelId);
         }

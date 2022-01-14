@@ -7,6 +7,6 @@ namespace AnalyticsDashboard.Api.Service.Interface
 {
     public interface ITradingModelService
     {
-        Task<IEnumerable<TradingModel>> GetAll();
+        Task<IEnumerable<TradingModelResponse>> GetAll();
     }
 }

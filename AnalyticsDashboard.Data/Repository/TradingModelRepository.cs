@@ -15,7 +15,7 @@ namespace AnalyticsDashboard.Data.Repository
             _entity = context.Set<TradingModel>();
         }
 
-        public async Task<List<TradingModel>> GetAll()
+        public async Task<IEnumerable<TradingModel>> GetAll()
         {
             return await _entity.ToListAsync();
         }

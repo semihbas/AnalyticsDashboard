@@ -2,37 +2,43 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AnalyticsDashboard.Api.Models;
 using AnalyticsDashboard.Api.Service.Interface;
 using AnalyticsDashboard.Data.Entity;
 using AnalyticsDashboard.Data.Model;
 using AnalyticsDashboard.Data.Repository.Interface;
+using AutoMapper;
 
 namespace AnalyticsDashboard.Api.Service
 {
     public class TradeService :ITradeService
     {
+        private readonly IMapper _mapper;
         private readonly ITradeRepository _tradeRepository;
-        public TradeService(ITradeRepository tradeRepository)
+        public TradeService(IMapper mapper, ITradeRepository tradeRepository)
         {
+          _mapper = mapper;
             _tradeRepository = tradeRepository;
         }
 
-        public async Task<IEnumerable<Trade>> Get(int? commodityId, int? tradingModelId)
+        public async Task<IEnumerable<TradeResponse>> Get(int? commodityId, int? tradingModelId)
         {
-            return await _tradeRepository.Get(commodityId, tradingModelId );
+            var model= await _tradeRepository.Get(commodityId, tradingModelId );
+
+            return _mapper.Map<IEnumerable<TradeResponse>>(model);
         }
 
 
         public async Task<IEnumerable<ChartSource>> Get(int commodityId)
         {
-            var res= await _tradeRepository.Get(commodityId);
+            var result= await _tradeRepository.Get(commodityId);
 
-            return res.GroupBy(
+            var groupedResult= result.GroupBy(
                 p => p.TradingModel.Name,
                 p => new Series { Name = p.Date, Value= p.PnLDaily },
                 (key, g) => new ChartSource { Name = key, Series = g.ToList() });
 
-
+            return groupedResult;
         }
     }
 }

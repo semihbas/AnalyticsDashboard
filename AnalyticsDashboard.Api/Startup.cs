@@ -17,6 +17,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using AnalyticsDashboard.Api.Mappings.Configuration;
 
 namespace AnalyticsDashboard.Api
 {
@@ -55,6 +56,7 @@ namespace AnalyticsDashboard.Api
             });
 
             services.AddLogging();
+            services.AddAutoMapperSetup();
 
             services.AddTransient(sp => sp);
             services.AddScoped<ICommodityService, CommodityService>();

@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ChartSourceResponse } from 'src/app/models/chartSourceResponse';
+import { CommodityResponse } from 'src/app/models/commodityResponse';
+import { CommodityService } from 'src/app/services/commodity/commodity.service';
+import { TradeService } from 'src/app/services/trade/trade.service';
 
 @Component({
   selector: 'app-historical-trend',
@@ -7,44 +11,43 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HistoricalTrendComponent implements OnInit {
 
+  chartSource: any;
 
-  multi = [
-    {
-      name: 'Temperature',
-      series: [{
-        value: 22,
-        name: '2021-06-01 10:45:00+00'
-      },
-      {
-        value: 33,
-        name: '2021-06-01 11:14:44+00'
-      },
-      {
-        value: 11,
-        name: '2021-06-01 13:45:00+00'
-      }]
-    }];
+  commodities: CommodityResponse[] = [];
+  selectedCommodityId: number;
 
+  // options
+  legend: boolean = true;
+  showLabels: boolean = true;
+  animations: boolean = true;
+  xAxis: boolean = true;
+  yAxis: boolean = true;
+  showYAxisLabel: boolean = true;
+  showXAxisLabel: boolean = true;
+  xAxisLabel: string = 'Date';
+  yAxisLabel: string = 'Price';
+  timeline: boolean = true;
 
- // options
- legend: boolean = true;
- showLabels: boolean = true;
- animations: boolean = true;
- xAxis: boolean = true;
- yAxis: boolean = true;
- showYAxisLabel: boolean = true;
- showXAxisLabel: boolean = true;
- xAxisLabel: string = 'Date';
- yAxisLabel: string = 'Price';
- timeline: boolean = true;
+  colorScheme = {
+    domain: ['#5AA454', '#E44D25', '#CFC0BB', '#7aa3e5', '#a8385d', '#aae3f5']
+  };
 
- public colorScheme = {
-  domain: ['rgba(255,255,255,0.8)']
-}; 
-
-  constructor() { }
-
-  ngOnInit(): void {
+  constructor(private tradeService: TradeService
+    , private commodityService: CommodityService) {
   }
 
+  
+  ngOnInit(): void {
+    this.commodityService.get().subscribe(response => {
+      this.commodities= response;
+      this.selectedCommodityId= this.commodities[0].id;   
+    });
+
+  }
+
+  commodityItemSelected(commodityId : number){
+    this.tradeService.GetChartSourceByCommodity(commodityId).subscribe((response: ChartSourceResponse[] )=> {
+      this.chartSource = response;
+    });
+  }
 }

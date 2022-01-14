@@ -3,8 +3,25 @@ namespace AnalyticsDashboard.Api.Models
 {
     public class TradeResponse
     {
-        public TradeResponse()
-        {
-        }
+        public int Id { get; set; }
+
+        public int TradingModelId { get; set; }
+
+        public int CommodityId { get; set; }
+
+        public DateTime Date { get; set; }
+
+        public string Contract { get; set; }
+
+        public decimal Price { get; set; }
+
+        public int Position { get; set; }
+
+        public int NewTradeAction { get; set; }
+
+        public decimal PnLDaily { get; set; }
+
+        public  TradingModelResponse TradingModel { get; set; }
+        public  CommodityResponse Commodity { get; set; }
     }
 }

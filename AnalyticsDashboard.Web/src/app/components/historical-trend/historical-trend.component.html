@@ -1,2 +1,37 @@
-<ngx-charts-bar-vertical  [results]="multi">
-</ngx-charts-bar-vertical>
+<mat-card>
+
+
+    <div fxLayout="row" fxLayoutAlign="left" fxLayoutGap="10px">
+       
+        <mat-form-field fxFlex="20">
+            <mat-label>Select Commodity</mat-label>
+            <mat-select [(value)]="selectedCommodityId">
+                <mat-option *ngFor="let commodity of this.commodities" value="{{commodity.id}}"  (click)="commodityItemSelected(commodity.id)"> {{commodity.name}}
+                </mat-option>
+  
+            </mat-select>
+        </mat-form-field>
+    </div>
+  
+  </mat-card>
+  
+  
+  <mat-card>
+    <mat-card-title>Commodity PnL Daily</mat-card-title>
+    <mat-card-content *ngIf="chartSource">
+      <ngx-charts-line-chart
+      [view] ="[2000,800]"
+        [legend]="legend"
+        [showXAxisLabel]="showXAxisLabel"
+        [showYAxisLabel]="showYAxisLabel"
+        [xAxis]="xAxis"
+        [yAxis]="yAxis"
+        [xAxisLabel]="xAxisLabel"
+        [yAxisLabel]="yAxisLabel"
+        [timeline]="timeline"
+        [results]="chartSource"
+      ></ngx-charts-line-chart>
+  
+    </mat-card-content>
+  </mat-card>
+  

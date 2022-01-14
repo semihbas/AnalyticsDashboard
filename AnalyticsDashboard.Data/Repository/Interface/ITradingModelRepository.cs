@@ -7,6 +7,6 @@ namespace AnalyticsDashboard.Data.Repository.Interface
 {
     public interface ITradingModelRepository
     {
-        Task<List<TradingModel>> GetAll();
+        Task<IEnumerable<TradingModel>> GetAll();
     }
 }
