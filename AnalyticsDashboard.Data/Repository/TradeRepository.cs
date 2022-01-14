@@ -10,27 +10,27 @@ using Microsoft.EntityFrameworkCore;
 namespace AnalyticsDashboard.Data.Repository
 {
 
-        public class TradeRepository : Repository<Trade>, ITradeRepository
+    public class TradeRepository : Repository<Trade>, ITradeRepository
+    {
+        private readonly DbSet<Trade> _entity;
+        public TradeRepository(AnalyticsDashboardDbContext context) : base(context)
         {
-            private readonly DbSet<Trade> _entity;
-            public TradeRepository(AnalyticsDashboardDbContext context) : base(context)
-            {
-                _entity = context.Set<Trade>();
-            }
+            _entity = context.Set<Trade>();
+        }
 
         public async Task<IEnumerable<Trade>> Get(int commodityId)
         {
             return await _entity
-              .Where(x=>x.CommodityId== commodityId)
+              .Where(x => x.CommodityId == commodityId)
               .Include(x => x.TradingModel)
               .Include(x => x.Commodity)
-              .OrderBy(x => x.Date)         
+              .OrderBy(x => x.Date)
               .ToListAsync();
 
         }
 
         public async Task<IEnumerable<Trade>> Get(int? commodityId, int? tradingModelId)
-        {   
+        {
             var query = _entity.AsQueryable();
 
             if (commodityId != null)
@@ -50,5 +50,5 @@ namespace AnalyticsDashboard.Data.Repository
               .ToListAsync();
         }
     }
-    
+
 }

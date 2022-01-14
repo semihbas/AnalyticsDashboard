@@ -27,6 +27,5 @@ namespace AnalyticsDashboard.Api.Controllers
             return await this._commodityService.GetAll();
         }
 
-      
     }
 }

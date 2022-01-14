@@ -8,19 +8,19 @@ using AutoMapper;
 
 namespace AnalyticsDashboard.Api.Service
 {
-    public class TradeService :ITradeService
+    public class TradeService : ITradeService
     {
         private readonly IMapper _mapper;
         private readonly ITradeRepository _tradeRepository;
         public TradeService(IMapper mapper, ITradeRepository tradeRepository)
         {
-          _mapper = mapper;
+            _mapper = mapper;
             _tradeRepository = tradeRepository;
         }
 
         public async Task<IEnumerable<TradeResponse>> Get(int? commodityId, int? tradingModelId)
         {
-            var model= await _tradeRepository.Get(commodityId, tradingModelId );
+            var model = await _tradeRepository.Get(commodityId, tradingModelId);
 
             return _mapper.Map<IEnumerable<TradeResponse>>(model);
         }
@@ -28,11 +28,11 @@ namespace AnalyticsDashboard.Api.Service
 
         public async Task<IEnumerable<ChartSource>> Get(int commodityId)
         {
-            var result= await _tradeRepository.Get(commodityId);
+            var result = await _tradeRepository.Get(commodityId);
 
-            var groupedResult= result.GroupBy(
+            var groupedResult = result.GroupBy(
                 p => p.TradingModel.Name,
-                p => new Series { Name = p.Date, Value= p.PnLDaily },
+                p => new Series { Name = p.Date, Value = p.PnLDaily },
                 (key, g) => new ChartSource { Name = key, Series = g.ToList() });
 
             return groupedResult;

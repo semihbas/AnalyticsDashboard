@@ -15,13 +15,13 @@ namespace AnalyticsDashboard.Api.Service
 
         public TradingModelService(IMapper mapper, ITradingModelRepository tradingModelRepository)
         {
-           _mapper = mapper;
+            _mapper = mapper;
             _tradingModelRepository = tradingModelRepository;
         }
 
         public async Task<IEnumerable<TradingModelResponse>> GetAll()
         {
-            var model= await _tradingModelRepository.GetAll();
+            var model = await _tradingModelRepository.GetAll();
 
             return _mapper.Map<IEnumerable<TradingModelResponse>>(model);
         }

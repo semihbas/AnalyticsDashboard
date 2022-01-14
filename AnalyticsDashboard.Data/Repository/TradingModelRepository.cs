@@ -19,7 +19,5 @@ namespace AnalyticsDashboard.Data.Repository
         {
             return await _entity.ToListAsync();
         }
-
-        
     }
 }
