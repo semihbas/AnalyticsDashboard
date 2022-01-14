@@ -1,10 +1,6 @@
 ﻿using AnalyticsDashboard.Api.Models;
 using AnalyticsDashboard.Data.Entity;
 using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace AnalyticsDashboard.Api.Mappings
 {

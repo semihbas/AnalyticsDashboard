@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using AnalyticsDashboard.Api.Models;
-using AnalyticsDashboard.Data.Entity;
-using AnalyticsDashboard.Data.Model;
 
 namespace AnalyticsDashboard.Api.Service.Interface
 {

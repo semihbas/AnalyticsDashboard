@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace AnalyticsDashboard.Data.Model
+namespace AnalyticsDashboard.Api.Models
 {
     public class ChartSource
     {

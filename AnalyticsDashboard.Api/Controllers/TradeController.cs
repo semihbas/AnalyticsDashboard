@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using AnalyticsDashboard.Api.Models;
 using AnalyticsDashboard.Api.Service.Interface;
-using AnalyticsDashboard.Data.Entity;
-using AnalyticsDashboard.Data.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
 namespace AnalyticsDashboard.Api.Controllers
 {
-       [Route("api/[controller]")]
+    [Route("api/[controller]")]
         public class TradeController : Controller
         {
 

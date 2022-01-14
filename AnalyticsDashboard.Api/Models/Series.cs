@@ -1,5 +1,5 @@
 ﻿using System;
-namespace AnalyticsDashboard.Data.Model
+namespace AnalyticsDashboard.Api.Models
 {
     public class Series
     {

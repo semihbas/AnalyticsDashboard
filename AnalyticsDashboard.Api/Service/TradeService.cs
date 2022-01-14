@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AnalyticsDashboard.Api.Models;
 using AnalyticsDashboard.Api.Service.Interface;
-using AnalyticsDashboard.Data.Entity;
-using AnalyticsDashboard.Data.Model;
 using AnalyticsDashboard.Data.Repository.Interface;
 using AutoMapper;
 
