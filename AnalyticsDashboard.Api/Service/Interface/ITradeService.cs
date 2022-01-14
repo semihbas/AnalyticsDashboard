@@ -10,7 +10,6 @@ namespace AnalyticsDashboard.Api.Service.Interface
     public interface ITradeService
     {
         Task<IEnumerable<ChartSource>> Get(int commodityId);
-        Task<IEnumerable<Trade>> Get(int skip, int take);
-        Task<IEnumerable<Trade>> Get(int skip, int take, int? commodityId, int? tradingModelId);
+        Task<IEnumerable<Trade>> Get(int? commodityId, int? tradingModelId);
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using AnalyticsDashboard.Data.Entity;
 using AnalyticsDashboard.Data.Repository.Interface;
@@ -17,36 +18,24 @@ namespace AnalyticsDashboard.Data.Repository
                 _entity = context.Set<Trade>();
             }
 
-            public async Task<List<Trade>> Get(int skip, int take)
-            {
-                return await _entity
-                .Include(x=>x.TradingModel)
-                .Include (x=>x.Commodity)
-                .OrderByDescending(x=>x.Id)
-                .Skip((skip-1)* take)
-                .Take(take)
-                .ToListAsync();
-            }
-
-
         public async Task<IEnumerable<Trade>> Get(int commodityId)
         {
             return await _entity
-                .Where(x=>x.CommodityId== commodityId)
+              .Where(x=>x.CommodityId== commodityId)
               .Include(x => x.TradingModel)
               .Include(x => x.Commodity)
-              .OrderByDescending(x => x.Id)         
+              .OrderBy(x => x.Date)         
               .ToListAsync();
 
         }
 
-        public async Task<IEnumerable<Trade>> Get(int skip, int take, int? commodityId, int? tradingModelId)
-        {
-            var query= _entity.AsNoTracking();
+        public async Task<IEnumerable<Trade>> Get(int? commodityId, int? tradingModelId)
+        {   
+            var query = _entity.AsQueryable();
 
-            if (commodityId!= null)
+            if (commodityId != null)
             {
-                query.Where(x=>x.CommodityId == commodityId);
+                query.Where(x => x.CommodityId == commodityId);
             }
 
             if (tradingModelId != null)
@@ -57,9 +46,7 @@ namespace AnalyticsDashboard.Data.Repository
             return await query
               .Include(x => x.TradingModel)
               .Include(x => x.Commodity)
-              .OrderByDescending(x => x.Id)
-              .Skip((skip - 1) * take)
-              .Take(take)
+              .OrderBy(x => x.Date)
               .ToListAsync();
         }
     }

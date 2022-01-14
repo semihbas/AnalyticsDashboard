@@ -17,15 +17,9 @@ namespace AnalyticsDashboard.Api.Service
             _tradeRepository = tradeRepository;
         }
 
-        public async Task<IEnumerable<Trade>> Get(int skip, int take)
+        public async Task<IEnumerable<Trade>> Get(int? commodityId, int? tradingModelId)
         {
-            return await _tradeRepository.Get(skip, take);
-
-        }
-
-        public async Task<IEnumerable<Trade>> Get(int skip, int take, int? commodityId, int? tradingModelId)
-        {
-            return await _tradeRepository.Get(skip, take,commodityId, tradingModelId );
+            return await _tradeRepository.Get(commodityId, tradingModelId );
         }
 
 

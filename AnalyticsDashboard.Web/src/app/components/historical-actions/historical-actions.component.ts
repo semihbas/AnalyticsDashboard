@@ -49,7 +49,7 @@ export class HistoricalActionsComponent implements OnInit, AfterViewInit {
   }
 
   private loadHistoricalActions() {
-    this.tradeService.get(1, 50, this.selectedCommodityId, this.selectedTradingModelId).subscribe(response => {
+    this.tradeService.get(this.selectedCommodityId, this.selectedTradingModelId).subscribe(response => {
       this.dataSource = new MatTableDataSource(response);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;

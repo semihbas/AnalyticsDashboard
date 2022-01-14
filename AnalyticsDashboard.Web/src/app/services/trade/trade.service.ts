@@ -11,10 +11,10 @@ export class TradeService {
 
   constructor(private http: HttpClient) { }
 
-  get(skip :number, take: number, commodityId: number | null, tradingModelId: number | null) : Observable<TradeResponse[]> {
+  get(commodityId: number | null, tradingModelId: number | null) : Observable<TradeResponse[]> {
     return this.http
       .get<TradeResponse[]>(
-        `${environment.apiUrl}Trade/GetByFilter?skip=${skip}&take=${take}&commodityId=${commodityId}&tradingModelId=${tradingModelId}`
+        `${environment.apiUrl}Trade/GetByFilter?commodityId=${commodityId}&tradingModelId=${tradingModelId}`
       );
   }
 

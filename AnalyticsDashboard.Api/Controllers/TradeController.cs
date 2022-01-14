@@ -22,19 +22,10 @@ namespace AnalyticsDashboard.Api.Controllers
                 _logger = logger;
         _tradeService = tradeService;
         }
-
-
-        [HttpGet]
-            public async Task<IEnumerable<Trade>> Get(int skip=1, int take=250)
-            {
-            return await _tradeService.Get(skip, take);
-            }
-
-
         [HttpGet("GetByFilter")]
-        public async Task<IEnumerable<Trade>> GetByFilter(int skip, int take,int? commodityId, int? tradingModelId)
+        public async Task<IEnumerable<Trade>> GetByFilter(int? commodityId, int? tradingModelId)
         {
-            return await _tradeService.Get(skip, take,commodityId, tradingModelId);
+            return await _tradeService.Get(commodityId, tradingModelId);
         }
 
         [HttpGet("GetChartSourceByCommodity")]
