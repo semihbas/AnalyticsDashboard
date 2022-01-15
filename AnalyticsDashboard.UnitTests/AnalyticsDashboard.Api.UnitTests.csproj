@@ -18,10 +18,12 @@
     <None Remove="Controllers\" />
     <None Remove="Services\" />
     <None Remove="Moq" />
+    <None Remove="Middleware\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controllers\" />
     <Folder Include="Services\" />
+    <Folder Include="Middleware\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AnalyticsDashboard.Api\AnalyticsDashboard.Api.csproj" />

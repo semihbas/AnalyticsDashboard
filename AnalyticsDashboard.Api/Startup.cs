@@ -86,7 +86,7 @@ namespace AnalyticsDashboard.Api
 
             app.UseCors(configurePolicy => configurePolicy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
-            app.UseExceptionMiddlewareExtensions();
+            app.UseMiddleware<ExceptionMiddleware>();
 
             app.UseRouting();
 

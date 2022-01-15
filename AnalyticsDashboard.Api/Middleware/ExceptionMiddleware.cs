@@ -1,63 +1,70 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 
 namespace AnalyticsDashboard.Api.Middleware
 {
     public class ExceptionMiddleware
     {
-        private readonly RequestDelegate _next;
-        private readonly ILogger<ExceptionMiddleware> _logger;
+        private const string JsonContentType = "application/json";
+        private readonly RequestDelegate _request;
+        private readonly ILogger _logger;
 
         public ExceptionMiddleware(RequestDelegate next, ILoggerFactory loggerFactory)
         {
-            _next = next ?? throw new ArgumentNullException(nameof(next));
-            _logger = loggerFactory?.CreateLogger<ExceptionMiddleware>() ?? throw new ArgumentNullException(nameof(loggerFactory));
+            _request = next;
+            _logger = loggerFactory.CreateLogger<ExceptionMiddleware>();
         }
 
-        public async Task Invoke(HttpContext context)
+
+        public async Task InvokeAsync(HttpContext context)
         {
             try
             {
-                await _next(context);
+                await _request(context);
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
-                await ResponseException(context, ex);
-            }
-        }
+                context.Response.ContentType = JsonContentType;
 
-        private async Task ResponseException(HttpContext context, Exception ex)
-        {
-            if (context.Response.HasStarted)
-            {
-                _logger.LogWarning("The response has already started, the http status code middleware will not be executed.");
-            }
+                void SetErrorMessage(string message)
+                {
+                    context.Response.WriteAsync(
+                        JsonConvert.SerializeObject(new GlobalErrorDetails
+                        {
+                            Message = message
+                        }));
 
-            context.Response.Clear();
+                    _logger.LogError($"Message: {message}. Endpoint: {context.Request.Path}. StatusCode: {context.Response.StatusCode}");
+                }
 
-            if (ex is ResponseException)
-            {
-                context.Response.StatusCode = ((ResponseException)ex).StatusCode;
-                context.Response.ContentType = "text/plain";
+                switch (exception)
+                {
+                    case var _ when exception is ValidationException:
+                        context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                        SetErrorMessage(exception.Message);
+                        break;
+                    case var _ when exception is UnauthorizedAccessException:
+                        context.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
+                        SetErrorMessage("You have no access");
+                        break;
+                    default:
+                        context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+                        SetErrorMessage("Internal server error");
+                        break;
+                }
             }
-            else
-            {
-                context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-            }
-
-            await context.Response.WriteAsync(ex.Message);
         }
     }
 
-    public static class ExceptionMiddlewareExtensions
+    public class GlobalErrorDetails
     {
-        public static IApplicationBuilder UseExceptionMiddlewareExtensions(this IApplicationBuilder builder)
-        {
-            return builder.UseMiddleware<ExceptionMiddleware>();
-        }
+        public string Message { get; set; }
     }
+
 }
