@@ -18,7 +18,7 @@ namespace AnalyticsDashboard.Data.Repository
             _entity = context.Set<Trade>();
         }
 
-        public async Task<IEnumerable<Trade>> Get(int commodityId)
+        public async Task<List<Trade>> Get(int commodityId)
         {
             return await _entity
               .Where(x => x.CommodityId == commodityId)
@@ -29,7 +29,7 @@ namespace AnalyticsDashboard.Data.Repository
 
         }
 
-        public async Task<IEnumerable<Trade>> Get(DateTime fromDate)
+        public async Task<List<Trade>> Get(DateTime fromDate)
         {
             return await _entity
               .Where(x => x.Date >= fromDate)
@@ -41,7 +41,7 @@ namespace AnalyticsDashboard.Data.Repository
         }
 
 
-        public async Task<IEnumerable<Trade>> Get(int? commodityId, int? tradingModelId)
+        public async Task<List<Trade>> Get(int? commodityId, int? tradingModelId)
         {
             var query = _entity.AsQueryable();
 

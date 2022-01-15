@@ -8,6 +8,6 @@ namespace AnalyticsDashboard.Api.Service.Interface
 {
     public interface ICommodityService
     {
-        Task<IEnumerable<CommodityResponse>> GetAll();
+        Task<List<CommodityResponse>> GetAll();
     }
 }

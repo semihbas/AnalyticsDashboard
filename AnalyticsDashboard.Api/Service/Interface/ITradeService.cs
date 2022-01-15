@@ -7,8 +7,8 @@ namespace AnalyticsDashboard.Api.Service.Interface
 {
     public interface ITradeService
     {
-        Task<IEnumerable<ChartSource>> Get(int commodityId);
-        Task<IEnumerable<TradeResponse>> Get(int? commodityId, int? tradingModelId);
-        Task<IEnumerable<ChartSource>> Get(DateTime fromDate);
+        Task<List<ChartSource>> Get(int commodityId);
+        Task<List<TradeResponse>> Get(int? commodityId, int? tradingModelId);
+        Task<List<ChartSource>> Get(DateTime fromDate);
     }
 }

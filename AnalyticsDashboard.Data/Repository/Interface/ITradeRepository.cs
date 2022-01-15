@@ -8,8 +8,8 @@ namespace AnalyticsDashboard.Data.Repository.Interface
 {
     public interface ITradeRepository
     {
-        Task<IEnumerable<Trade>> Get(int commodityId);
-        Task<IEnumerable<Trade>> Get(DateTime fromDate);
-        Task<IEnumerable<Trade>> Get(int? commodityId, int? tradingModelId);
+        Task<List<Trade>> Get(int commodityId);
+        Task<List<Trade>> Get(DateTime fromDate);
+        Task<List<Trade>> Get(int? commodityId, int? tradingModelId);
     }
 }

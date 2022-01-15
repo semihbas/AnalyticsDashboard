@@ -19,15 +19,15 @@ namespace AnalyticsDashboard.Api.Service
             _tradeRepository = tradeRepository;
         }
 
-        public async Task<IEnumerable<TradeResponse>> Get(int? commodityId, int? tradingModelId)
+        public async Task<List<TradeResponse>> Get(int? commodityId, int? tradingModelId)
         {
             var model = await _tradeRepository.Get(commodityId, tradingModelId);
 
-            return _mapper.Map<IEnumerable<TradeResponse>>(model);
+            return _mapper.Map<List<TradeResponse>>(model);
         }
 
 
-        public async Task<IEnumerable<ChartSource>> Get(int commodityId)
+        public async Task<List<ChartSource>> Get(int commodityId)
         {
             var result = await _tradeRepository.Get(commodityId);
 
@@ -36,11 +36,11 @@ namespace AnalyticsDashboard.Api.Service
                 p => new Series { Name = p.Date, Value = p.PnLDaily },
                 (key, g) => new ChartSource { Name = key, Series = g.ToList() });
 
-            return groupedResult;
+            return groupedResult.ToList();
         }
 
 
-        public async Task<IEnumerable<ChartSource>> Get(DateTime fromDate)
+        public async Task<List<ChartSource>> Get(DateTime fromDate)
         {
             var result = await _tradeRepository.Get(fromDate);
 

@@ -19,11 +19,11 @@ namespace AnalyticsDashboard.Api.Service
             _commodityRepository = commodityRepository;
         }
 
-        public async Task<IEnumerable<CommodityResponse>> GetAll()
+        public async Task<List<CommodityResponse>> GetAll()
         {
             var model = await _commodityRepository.GetAll();
 
-            return _mapper.Map<IEnumerable<CommodityResponse>>(model);
+            return _mapper.Map<List<CommodityResponse>>(model);
         }
     }
 }
