@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using AnalyticsDashboard.Api.Service.Interface;
 using Microsoft.AspNetCore.Mvc;
@@ -21,9 +22,9 @@ namespace AnalyticsDashboard.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<TradingModelResponse>> Get()
+        public async Task<IActionResult> Get()
         {
-            return await _tradingModelService.GetAll();
+            return Ok( await _tradingModelService.GetAll());
         }
 
     }

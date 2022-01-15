@@ -19,6 +19,7 @@
     <None Remove="Mappings\Resolvers\" />
     <None Remove="AutoMapper.Extensions.Microsoft.DependencyInjection" />
     <None Remove="Validations\" />
+    <None Remove="Middleware\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
@@ -26,6 +27,7 @@
     <Folder Include="Service\Interface\" />
     <Folder Include="Mappings\Resolvers\" />
     <Folder Include="Validations\" />
+    <Folder Include="Middleware\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.22" />

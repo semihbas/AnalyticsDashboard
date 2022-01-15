@@ -18,6 +18,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using AnalyticsDashboard.Api.Mappings.Configuration;
+using AnalyticsDashboard.Api.Middleware;
 
 namespace AnalyticsDashboard.Api
 {
@@ -85,6 +86,7 @@ namespace AnalyticsDashboard.Api
 
             app.UseCors(configurePolicy => configurePolicy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
+            app.UseExceptionMiddlewareExtensions();
 
             app.UseRouting();
 

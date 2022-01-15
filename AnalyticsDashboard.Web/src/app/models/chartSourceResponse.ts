@@ -7,4 +7,3 @@ export interface Series {
     name: any;
     value: any;
 }
-

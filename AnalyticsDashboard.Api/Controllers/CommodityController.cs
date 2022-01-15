@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Net.Http;
 using System.Threading.Tasks;
 using AnalyticsDashboard.Api.Models;
 using AnalyticsDashboard.Api.Service.Interface;
@@ -22,10 +24,11 @@ namespace AnalyticsDashboard.Api.Controllers
 
 
         [HttpGet]
-        public async Task<IEnumerable<CommodityResponse>> Get()
+        public async Task<IActionResult> Get()
         {
-            return await this._commodityService.GetAll();
-        }
+            var result = await this._commodityService.GetAll();
 
+            return Ok(result);
+        }
     }
 }

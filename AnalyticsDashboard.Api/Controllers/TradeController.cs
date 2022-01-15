@@ -1,6 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using System.Threading.Tasks;
-using AnalyticsDashboard.Api.Models;
 using AnalyticsDashboard.Api.Service.Interface;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -20,17 +19,26 @@ namespace AnalyticsDashboard.Api.Controllers
             _tradeService = tradeService;
         }
         [HttpGet("GetByFilter")]
-        public async Task<IEnumerable<TradeResponse>> GetByFilter(int? commodityId, int? tradingModelId)
+        public async Task<IActionResult> GetByFilter(int? commodityId, int? tradingModelId)
         {
-            return await _tradeService.Get(commodityId, tradingModelId);
+            return Ok(await _tradeService.Get(commodityId, tradingModelId));
         }
 
         [HttpGet("GetChartSourceByCommodity")]
-        public async Task<IEnumerable<ChartSource>> GetChartSourceByCommodity(int commodityId)
+        public async Task<IActionResult> GetChartSourceByCommodity(int commodityId)
         {
-            return await _tradeService.Get(commodityId);
+            return Ok(await _tradeService.Get(commodityId));
 
         }
+
+        [HttpGet("GetByDate")]
+        public async Task<IActionResult> GetByDate(int commodityId)
+        {
+            var res = await _tradeService.Get(DateTime.Now.AddYears(-2));
+
+            return Ok(res); ;
+        }
+
 
     }
 }

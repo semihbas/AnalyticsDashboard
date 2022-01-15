@@ -29,6 +29,18 @@ namespace AnalyticsDashboard.Data.Repository
 
         }
 
+        public async Task<IEnumerable<Trade>> Get(DateTime fromDate)
+        {
+            return await _entity
+              .Where(x => x.Date >= fromDate)
+              .Include(x => x.TradingModel)
+              .Include(x => x.Commodity)
+              .OrderBy(x => x.Date)
+              .ToListAsync();
+
+        }
+
+
         public async Task<IEnumerable<Trade>> Get(int? commodityId, int? tradingModelId)
         {
             var query = _entity.AsQueryable();

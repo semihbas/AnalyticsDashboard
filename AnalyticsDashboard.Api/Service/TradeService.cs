@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AnalyticsDashboard.Api.Models;
@@ -36,6 +37,18 @@ namespace AnalyticsDashboard.Api.Service
                 (key, g) => new ChartSource { Name = key, Series = g.ToList() });
 
             return groupedResult;
+        }
+
+
+        public async Task<IEnumerable<ChartSource>> Get(DateTime fromDate)
+        {
+            var result = await _tradeRepository.Get(fromDate);
+
+            var groupedResult = result
+                .GroupBy(p => new { Commodity= p.Commodity, TradingModel = p.TradingModel })
+                .GroupBy(p =>  p.Key.Commodity);
+
+            return null;
         }
     }
 }
