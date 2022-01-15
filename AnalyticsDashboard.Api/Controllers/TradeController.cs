@@ -32,7 +32,7 @@ namespace AnalyticsDashboard.Api.Controllers
         }
 
         [HttpGet("GetByDate")]
-        public async Task<IActionResult> GetByDate(int commodityId)
+        public async Task<IActionResult> GetByDate(DateTime date)
         {
             var res = await _tradeService.Get(DateTime.Now.AddYears(-2));
 
