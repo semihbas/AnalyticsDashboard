@@ -19,11 +19,11 @@ namespace AnalyticsDashboard.Api.Service
             _tradingModelRepository = tradingModelRepository;
         }
 
-        public async Task<IEnumerable<TradingModelResponse>> GetAll()
+        public async Task<List<TradingModelResponse>> GetAll()
         {
             var model = await _tradingModelRepository.GetAll();
 
-            return _mapper.Map<IEnumerable<TradingModelResponse>>(model);
+            return _mapper.Map<List<TradingModelResponse>>(model);
         }
     }
 }
