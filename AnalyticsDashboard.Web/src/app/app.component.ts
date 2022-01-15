@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'AnalyticsDashboard.Web';
+  title = 'Analytics Dashboard';
 
   getYear() {
     return new Date().getUTCFullYear();

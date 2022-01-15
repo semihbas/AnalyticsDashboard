@@ -11,9 +11,11 @@ export class SpinnerService {
 
   spinnerState = this.spinnerSubject.asObservable();
   body = document.querySelector('body');
+
   constructor(@Optional() @SkipSelf() prior: SpinnerService) {
     if (prior) { return prior; }
   }
+  
   show() {
     this.spinnerSubject.next({ show: true } as SpinnerState);
     this.body?.classList.add('body-disabled');

@@ -20,16 +20,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'AnalyticsDashboard.Web'`, () => {
+  it(`should have as title 'Analytics Dashboard'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('AnalyticsDashboard.Web');
+    expect(app.title).toEqual('Analytics Dashboard');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('AnalyticsDashboard.Web app is running!');
+    expect(compiled.querySelector('.content span')?.textContent).toContain('Analytics Dashboard app is running!');
   });
 });
