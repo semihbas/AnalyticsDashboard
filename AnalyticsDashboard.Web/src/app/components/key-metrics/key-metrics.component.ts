@@ -43,6 +43,7 @@ export class KeyMetricsComponent implements OnInit {
     this.commodityService.get().subscribe(response => {
       this.commodities= response;
       this.selectedCommodityId= this.commodities[0].id;   
+      this.commodityItemSelected(this.selectedCommodityId);
     });
 
   }

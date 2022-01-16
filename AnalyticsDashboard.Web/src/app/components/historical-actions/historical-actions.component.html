@@ -2,17 +2,7 @@
 
 
     <div fxLayout="row" fxLayoutAlign="left" fxLayoutGap="10px">
-        <mat-form-field fxFlex="20">
-            <mat-label>Select Model</mat-label>
-            <mat-select [(value)]="selectedTradingModelId">
-                <mat-option *ngFor="let tradingModel of this.tradingModels" value="{{tradingModel.id}}" 
-                (click)="tradingModelItemSelected()">{{tradingModel.name}}</mat-option>
-
-            </mat-select>
-        </mat-form-field>
-
-
-
+    
         <mat-form-field fxFlex="20">
             <mat-label>Select Commodity</mat-label>
             <mat-select [(value)]="selectedCommodityId">
@@ -22,6 +12,16 @@
 
             </mat-select>
         </mat-form-field>
+
+        <mat-form-field fxFlex="20">
+            <mat-label>Select Model</mat-label>
+            <mat-select [(value)]="selectedTradingModelId">
+                <mat-option *ngFor="let tradingModel of this.tradingModels" value="{{tradingModel.id}}" 
+                (click)="tradingModelItemSelected()">{{tradingModel.name}}</mat-option>
+
+            </mat-select>
+        </mat-form-field>
+
     </div>
 
 </mat-card>
@@ -29,14 +29,15 @@
 <div>
     <table mat-table [dataSource]="dataSource" matSort>
 
-        <ng-container matColumnDef="tradingModel">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Model </th>
-            <td mat-cell *matCellDef="let row"> {{row.tradingModel.name}} </td>
-        </ng-container>
 
         <ng-container matColumnDef="commodity">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Commodity </th>
             <td mat-cell *matCellDef="let row"> {{row.commodity.name}} </td>
+        </ng-container>
+        
+        <ng-container matColumnDef="tradingModel">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Model </th>
+            <td mat-cell *matCellDef="let row"> {{row.tradingModel.name}} </td>
         </ng-container>
 
         <ng-container matColumnDef="newTradeAction">

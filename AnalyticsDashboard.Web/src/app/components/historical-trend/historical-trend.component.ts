@@ -36,17 +36,18 @@ export class HistoricalTrendComponent implements OnInit {
     , private commodityService: CommodityService) {
   }
 
-  
+
   ngOnInit(): void {
     this.commodityService.get().subscribe(response => {
-      this.commodities= response;
-      this.selectedCommodityId= this.commodities[0].id;   
+      this.commodities = response;
+      this.selectedCommodityId = this.commodities[0].id;
+      this.commodityItemSelected(this.selectedCommodityId);
     });
 
   }
 
-  commodityItemSelected(commodityId : number){
-    this.tradeService.GetChartSourceByCommodity(commodityId).subscribe((response: ChartSourceResponse[] )=> {
+  commodityItemSelected(commodityId: number) {
+    this.tradeService.GetChartSourceByCommodity(commodityId).subscribe((response: ChartSourceResponse[]) => {
       this.chartSource = response;
     });
   }

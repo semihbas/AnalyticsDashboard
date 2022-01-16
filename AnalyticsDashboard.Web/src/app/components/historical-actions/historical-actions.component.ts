@@ -15,7 +15,7 @@ import { TradingModelService } from 'src/app/services/trading-model/trading-mode
   styleUrls: ['./historical-actions.component.scss']
 })
 export class HistoricalActionsComponent implements OnInit, AfterViewInit {
-  displayedColumns: string[] = ['tradingModel', 'commodity', 'newTradeAction'];
+  displayedColumns: string[] = ['commodity','tradingModel', 'newTradeAction'];
   dataSource: MatTableDataSource<TradeResponse>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -25,7 +25,7 @@ export class HistoricalActionsComponent implements OnInit, AfterViewInit {
 
 
   selectedCommodityId: number;
-  selectedTradingModelId: number;
+  selectedTradingModelId: number | null;
 
   constructor(private tradeService: TradeService,
     private commodityService: CommodityService,
@@ -43,7 +43,7 @@ export class HistoricalActionsComponent implements OnInit, AfterViewInit {
 
   }
   commodityItemSelected(){
-
+    this.selectedTradingModelId = null;
     this.loadHistoricalActions();
 
   }

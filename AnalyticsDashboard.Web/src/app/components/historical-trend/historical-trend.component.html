@@ -6,9 +6,8 @@
         <mat-form-field fxFlex="20">
             <mat-label>Select Commodity</mat-label>
             <mat-select [(value)]="selectedCommodityId">
-                <mat-option *ngFor="let commodity of this.commodities" value="{{commodity.id}}"  (click)="commodityItemSelected(commodity.id)"> {{commodity.name}}
+                <mat-option *ngFor="let commodity of this.commodities" [value]="commodity.id"  (click)="commodityItemSelected(commodity.id)"> {{commodity.name}}
                 </mat-option>
-  
             </mat-select>
         </mat-form-field>
     </div>
