@@ -18,7 +18,7 @@ export class TradeService {
       );
   }
 
-  GetChartSourceByCommodity(commodityId: number): Observable<any> {
+  getChartSourceByCommodity(commodityId: number): Observable<any> {
     return this.http
       .get<TradeResponse[]>(
         `${environment.apiUrl}Trade/getChartSourceByCommodity?commodityId=${commodityId}`

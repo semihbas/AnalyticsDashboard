@@ -14,13 +14,13 @@ import { TradingModelService } from 'src/app/services/trading-model/trading-mode
   templateUrl: './historical-actions.component.html',
   styleUrls: ['./historical-actions.component.scss']
 })
-export class HistoricalActionsComponent implements OnInit, AfterViewInit {
+export class HistoricalActionsComponent implements OnInit {
   displayedColumns: string[] = ['commodity', 'tradingModel', 'newTradeAction'];
   dataSource: MatTableDataSource<TradeResponse>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  selectedDateFrom: Date;
+  selectedDateFrom = new Date(new Date().setDate(new Date().getDate() - 5));
 
   tradingModels: TradingModelResponse[] = [];
   commodities: CommodityResponse[] = [];
@@ -60,10 +60,6 @@ export class HistoricalActionsComponent implements OnInit, AfterViewInit {
 
   tradingModelItemSelected() {
     this.loadHistoricalActions();
-  }
-
-  ngAfterViewInit() {
-    this.selectedDateFrom= new Date(new Date().setDate(new Date().getDate()-5));
   }
 
   dateFromChanged() {

@@ -47,7 +47,7 @@ export class HistoricalTrendComponent implements OnInit {
   }
 
   commodityItemSelected(commodityId: number) {
-    this.tradeService.GetChartSourceByCommodity(commodityId).subscribe((response: ChartSourceResponse[]) => {
+    this.tradeService.getChartSourceByCommodity(commodityId).subscribe((response: ChartSourceResponse[]) => {
       this.chartSource = response;
     });
   }
