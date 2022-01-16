@@ -2,6 +2,13 @@
 
 
     <div fxLayout="row" fxLayoutAlign="left" fxLayoutGap="10px">
+
+        <mat-form-field fxFlex="20">
+            <mat-label>From date</mat-label>
+            <input matInput [matDatepicker]="picker" [value]="selectedDateFrom" (dateChange)="dateFromChanged()">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
     
         <mat-form-field fxFlex="20">
             <mat-label>Select Commodity</mat-label>
@@ -9,7 +16,6 @@
                 <mat-option *ngFor="let commodity of this.commodities" value="{{commodity.id}}" 
                  (click)="commodityItemSelected()"> {{commodity.name}}
                 </mat-option>
-
             </mat-select>
         </mat-form-field>
 

@@ -11,14 +11,14 @@ export class TradeService {
 
   constructor(private http: HttpClient) { }
 
-  get(commodityId: number | null, tradingModelId: number | null) : Observable<TradeResponse[]> {
+  get(selectedDateFrom: Date, commodityId: number | null, tradingModelId: number | null): Observable<TradeResponse[]> {
     return this.http
       .get<TradeResponse[]>(
-        `${environment.apiUrl}Trade/GetByFilter?commodityId=${commodityId}&tradingModelId=${tradingModelId}`
+        `${environment.apiUrl}Trade/GetByFilter?fromDate=${selectedDateFrom}&commodityId=${commodityId}&tradingModelId=${tradingModelId}`
       );
   }
 
-  GetChartSourceByCommodity(commodityId: number) : Observable<any> {
+  GetChartSourceByCommodity(commodityId: number): Observable<any> {
     return this.http
       .get<TradeResponse[]>(
         `${environment.apiUrl}Trade/getChartSourceByCommodity?commodityId=${commodityId}`

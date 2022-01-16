@@ -15,10 +15,12 @@ import { TradingModelService } from 'src/app/services/trading-model/trading-mode
   styleUrls: ['./historical-actions.component.scss']
 })
 export class HistoricalActionsComponent implements OnInit, AfterViewInit {
-  displayedColumns: string[] = ['commodity','tradingModel', 'newTradeAction'];
+  displayedColumns: string[] = ['commodity', 'tradingModel', 'newTradeAction'];
   dataSource: MatTableDataSource<TradeResponse>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
+
+  selectedDateFrom: Date;
 
   tradingModels: TradingModelResponse[] = [];
   commodities: CommodityResponse[] = [];
@@ -33,34 +35,39 @@ export class HistoricalActionsComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
 
-    this.commodityService.get().subscribe(response => {
-      this.commodities= response;
+    this.commodityService.get().subscribe((response: CommodityResponse[]) => {
+      this.commodities = response;
     });
 
-    this.tradingModelService.get().subscribe(response => {
-      this.tradingModels= response;
+    this.tradingModelService.get().subscribe((response: TradingModelResponse[]) => {
+      this.tradingModels = response;
     });
 
   }
-  commodityItemSelected(){
+  commodityItemSelected() {
     this.selectedTradingModelId = null;
     this.loadHistoricalActions();
 
   }
 
   private loadHistoricalActions() {
-    this.tradeService.get(this.selectedCommodityId, this.selectedTradingModelId).subscribe(response => {
+    this.tradeService.get(this.selectedDateFrom, this.selectedCommodityId, this.selectedTradingModelId).subscribe((response: TradeResponse[] | undefined) => {
       this.dataSource = new MatTableDataSource(response);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     });
   }
 
-  tradingModelItemSelected(){
+  tradingModelItemSelected() {
     this.loadHistoricalActions();
   }
 
   ngAfterViewInit() {
+    this.selectedDateFrom= new Date(new Date().setDate(new Date().getDate()-5));
+  }
+
+  dateFromChanged() {
+    this.loadHistoricalActions();
   }
 
 }

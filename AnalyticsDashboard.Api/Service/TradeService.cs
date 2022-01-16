@@ -19,9 +19,9 @@ namespace AnalyticsDashboard.Api.Service
             _tradeRepository = tradeRepository;
         }
 
-        public async Task<List<TradeResponse>> Get(int? commodityId, int? tradingModelId)
+        public async Task<List<TradeResponse>> Get(DateTime fromDate, int? commodityId, int? tradingModelId)
         {
-            var model = await _tradeRepository.Get(commodityId, tradingModelId);
+            var model = await _tradeRepository.Get(fromDate, commodityId, tradingModelId);
 
             return _mapper.Map<List<TradeResponse>>(model);
         }
@@ -45,8 +45,8 @@ namespace AnalyticsDashboard.Api.Service
             var result = await _tradeRepository.Get(fromDate);
 
             var groupedResult = result
-                .GroupBy(p => new { Commodity= p.Commodity, TradingModel = p.TradingModel })
-                .GroupBy(p =>  p.Key.Commodity);
+                .GroupBy(p => new { Commodity = p.Commodity, TradingModel = p.TradingModel })
+                .GroupBy(p => p.Key.Commodity);
 
             return null;
         }

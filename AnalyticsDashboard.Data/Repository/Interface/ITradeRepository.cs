@@ -10,6 +10,6 @@ namespace AnalyticsDashboard.Data.Repository.Interface
     {
         Task<List<Trade>> Get(int commodityId);
         Task<List<Trade>> Get(DateTime fromDate);
-        Task<List<Trade>> Get(int? commodityId, int? tradingModelId);
+        Task<List<Trade>> Get(DateTime fromDate, int? commodityId, int? tradingModelId);
     }
 }

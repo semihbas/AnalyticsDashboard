@@ -19,9 +19,9 @@ namespace AnalyticsDashboard.Api.Controllers
             _tradeService = tradeService;
         }
         [HttpGet("GetByFilter")]
-        public async Task<IActionResult> GetByFilter(int? commodityId, int? tradingModelId)
+        public async Task<IActionResult> GetByFilter(DateTime fromDate, int? commodityId, int? tradingModelId)
         {
-            return Ok(await _tradeService.Get(commodityId, tradingModelId));
+            return Ok(await _tradeService.Get(fromDate, commodityId, tradingModelId));
         }
 
         [HttpGet("GetChartSourceByCommodity")]

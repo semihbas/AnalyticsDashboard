@@ -44,9 +44,9 @@ namespace AnalyticsDashboard.Api.UnitTests.Controllers
         {
             _mockService.Setup(x => x.Get(It.IsAny<int>())).ReturnsAsync(new List<ChartSource>());
 
-            var result = await _controller.GetByFilter(It.IsAny<int>(), It.IsAny<int>()) as OkObjectResult;
+            var result = await _controller.GetByFilter(It.IsAny<DateTime>(), It.IsAny<int>(), It.IsAny<int>()) as OkObjectResult;
 
-            _mockService.Verify(mock => mock.Get(It.IsAny<int>(), It.IsAny<int>()), Times.Once());
+            _mockService.Verify(mock => mock.Get(It.IsAny<DateTime>(), It.IsAny<int>(), It.IsAny<int>()), Times.Once());
 
             Assert.AreEqual(((int)HttpStatusCode.OK), result.StatusCode);
         }

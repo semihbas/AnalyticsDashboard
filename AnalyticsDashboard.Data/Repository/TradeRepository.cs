@@ -41,7 +41,7 @@ namespace AnalyticsDashboard.Data.Repository
         }
 
 
-        public async Task<List<Trade>> Get(int? commodityId, int? tradingModelId)
+        public async Task<List<Trade>> Get(DateTime fromDate, int? commodityId, int? tradingModelId)
         {
             var query = _entity.AsNoTracking();
 
@@ -56,6 +56,7 @@ namespace AnalyticsDashboard.Data.Repository
             }
 
             var result = await query
+                .Where(x => x.Date >= fromDate)
               .Include(x => x.TradingModel)
               .Include(x => x.Commodity)
               .OrderBy(x => x.Date)
