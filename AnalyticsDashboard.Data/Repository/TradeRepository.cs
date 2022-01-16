@@ -43,23 +43,25 @@ namespace AnalyticsDashboard.Data.Repository
 
         public async Task<List<Trade>> Get(int? commodityId, int? tradingModelId)
         {
-            var query = _entity.AsQueryable();
+            var query = _entity.AsNoTracking();
 
-            if (commodityId != null)
+            if (commodityId != null && commodityId != 0)
             {
-                query.Where(x => x.CommodityId == commodityId);
+                query = query.Where(x => x.CommodityId == commodityId);
             }
 
-            if (tradingModelId != null)
+            if (tradingModelId != null && tradingModelId != 0)
             {
-                query.Where(x => x.TradingModelId == tradingModelId);
+                query = query.Where(x => x.TradingModelId == tradingModelId);
             }
 
-            return await query
+            var result = await query
               .Include(x => x.TradingModel)
               .Include(x => x.Commodity)
               .OrderBy(x => x.Date)
               .ToListAsync();
+
+            return result;
         }
     }
 
