@@ -103,7 +103,9 @@ import { LoaderInterceptor } from './interceptor/loader-interceptor';
     FlexLayoutModule,
     NgxChartsModule
   ],
-  providers: [SpinnerService, TradeService, TradingModelService, 
+  providers: [SpinnerService, 
+    TradeService, 
+    TradingModelService, 
     CommodityService,
     LoaderService,
     {
