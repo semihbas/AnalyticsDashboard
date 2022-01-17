@@ -38,7 +38,7 @@ namespace AnalyticsDashboard.Api.UnitTests.Services
         }
 
         [TestMethod]
-        public async Task GetAll_Returns_Valid_ResponeAsync()
+        public async Task GetByCommodityId_Returns_Valid_ResponeAsync()
         {
             var chartSource = new List<ChartSource>() { new ChartSource()
             {
@@ -72,6 +72,34 @@ namespace AnalyticsDashboard.Api.UnitTests.Services
 
             _mockRepository.Verify(mock => mock.Get(It.IsAny<int>()), Times.Once());
             Assert.AreEqual(result.Count, chartSource.Count);
+        }
+
+
+
+       
+        [TestMethod]
+        public async Task GetByDateAndCommodityAndTradingModel_Returns_Valid_ResponeAsync()
+        {
+
+            var trades = new List<Trade>() { new Trade(){
+                CommodityId=5,
+                Contract = "Test",
+                PnLDaily = 5,
+                Date= DateTime.Today,
+                TradingModel = new TradingModel()
+                {
+                    Id= 5,
+                    Name = "test"
+                }
+            } };
+
+
+            _mockRepository.Setup(x => x.Get(DateTime.Today,5,5)).ReturnsAsync(trades);
+
+            var result = await _service.Get(DateTime.Today, 5,5);
+
+            _mockRepository.Verify(mock => mock.Get(It.IsAny<DateTime>(),It.IsAny<int>(), It.IsAny<int>()), Times.Once());
+            Assert.AreEqual(result.Count, trades.Count);
         }
     }
 }

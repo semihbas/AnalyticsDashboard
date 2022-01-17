@@ -4,6 +4,7 @@ import { TradeResponse } from 'src/app/models/tradeResponse';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 import { ChartSourceResponse } from 'src/app/models/chartSourceResponse';
+import { TradingModelTrades } from 'src/app/models/tradingModelTrades';
 @Injectable({
   providedIn: 'root'
 })
@@ -25,4 +26,11 @@ export class TradeService {
       );
   }
 
+  getByDateAndCommodity(fromDate: string, commodityId: number) : Observable<TradingModelTrades[]> {
+    return this.http
+    .get<TradingModelTrades[]>(
+      `${environment.apiUrl}Trade/getByDateAndCommodity?fromDate=${fromDate}&commodityId=${commodityId}`
+    );
+  }
 }
+

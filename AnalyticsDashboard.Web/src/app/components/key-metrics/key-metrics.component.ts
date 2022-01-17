@@ -1,10 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { TradeService } from 'src/app/services/trade/trade.service';
 import { Observable } from 'rxjs';
 import { TradeResponse } from 'src/app/models/tradeResponse';
 import { ChartSourceResponse } from 'src/app/models/chartSourceResponse';
 import { CommodityService } from 'src/app/services/commodity/commodity.service';
 import { CommodityResponse } from 'src/app/models/commodityResponse';
+import { TradingModelTrades } from 'src/app/models/tradingModelTrades';
+import { MatDatepickerInputEvent } from '@angular/material/datepicker';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatSort } from '@angular/material/sort';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-key-metrics',
@@ -13,45 +18,41 @@ import { CommodityResponse } from 'src/app/models/commodityResponse';
 })
 
 export class KeyMetricsComponent implements OnInit {
-  chartSource: any;
 
+  displayedColumns: string[] = ['commodity', 'tradingModel','date', 'newTradeAction','contract', 'price', 'position','pnLDaily'];
+   
+  tradingModelTrades: TradingModelTrades[] = [];
   commodities: CommodityResponse[] = [];
+  selectedDateFrom = new Date(new Date().setDate(new Date().getDate() - 5));
   selectedCommodityId: number;
 
-  // options
-  legend: boolean = true;
-  showLabels: boolean = true;
-  animations: boolean = true;
-  xAxis: boolean = true;
-  yAxis: boolean = true;
-  showYAxisLabel: boolean = true;
-  showXAxisLabel: boolean = true;
-  xAxisLabel: string = 'Date';
-  yAxisLabel: string = 'Price';
-  timeline: boolean = true;
-
-  colorScheme = {
-    domain: ['#5AA454', '#E44D25', '#CFC0BB', '#7aa3e5', '#a8385d', '#aae3f5']
-  };
-
-  constructor(private tradeService: TradeService
-    , private commodityService: CommodityService) {
-  }
-
+  constructor(private tradeService: TradeService,
+    private commodityService: CommodityService) { }
 
   ngOnInit(): void {
+
     this.commodityService.get().subscribe((response: CommodityResponse[]) => {
       this.commodities = response;
-      this.selectedCommodityId = this.commodities[0].id;
-      this.commodityItemSelected(this.selectedCommodityId);
+      this.selectedCommodityId = this.commodities[0].id;      
     });
 
   }
+  commodityItemSelected() {
+    this.loadHistoricalActions();
+  }
 
-  commodityItemSelected(commodityId: number) {
-    this.tradeService.getChartSourceByCommodity(commodityId).subscribe((response: ChartSourceResponse[]) => {
-      this.chartSource = response;
+  private loadHistoricalActions() {
+    this.tradeService.getByDateAndCommodity(this.selectedDateFrom.toLocaleDateString(), this.selectedCommodityId).subscribe((response: TradingModelTrades[]) => {
+      this.tradingModelTrades = response;
     });
+  }
+
+
+  dateFromChanged(type: string, event: MatDatepickerInputEvent<Date>) {
+    if(event.value){
+      this.selectedDateFrom = event.value;
+    }
+    this.loadHistoricalActions();
   }
 
 }

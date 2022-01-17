@@ -18,6 +18,7 @@ namespace AnalyticsDashboard.Api.Controllers
             _logger = logger;
             _tradeService = tradeService;
         }
+
         [HttpGet("GetByFilter")]
         public async Task<IActionResult> GetByFilter(DateTime fromDate, int? commodityId, int? tradingModelId)
         {
@@ -28,17 +29,13 @@ namespace AnalyticsDashboard.Api.Controllers
         public async Task<IActionResult> GetChartSourceByCommodity(int commodityId)
         {
             return Ok(await _tradeService.Get(commodityId));
-
         }
 
-        [HttpGet("GetByDate")]
-        public async Task<IActionResult> GetByDate(DateTime date)
+        [HttpGet("GetByDateAndCommodity")]
+        public async Task<IActionResult> GetByDateAndCommodity(DateTime fromDate, int commodityId)
         {
-            var res = await _tradeService.Get(DateTime.Now.AddYears(-2));
-
-            return Ok(res); ;
+            return Ok(await _tradeService.Get(fromDate, commodityId)); 
         }
-
 
     }
 }

@@ -3,14 +3,10 @@ using System.Collections.Generic;
 
 namespace AnalyticsDashboard.Api.Models
 {
-    public class CommodityTradingModel
-    {
-        public List<TradingModelTrade> TradingModels { get; set; }
-    }
 
-    public class TradingModelTrade
+    public class TradingModelTrades
     {
+        public TradingModelResponse TradingModel { get; set; }
         public List<TradeResponse> Trades { get; set; }
     }
 }
-

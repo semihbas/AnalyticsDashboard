@@ -52,13 +52,13 @@ namespace AnalyticsDashboard.Api.UnitTests.Controllers
         }
 
         [TestMethod]
-        public async Task GetByDate_Should_Return_Valid_ResponseAsync()
+        public async Task GetByDateAndCommodity_Should_Return_Valid_ResponseAsync()
         {
             _mockService.Setup(x => x.Get(It.IsAny<int>())).ReturnsAsync(new List<ChartSource>());
 
-            var result = await _controller.GetByDate(It.IsAny<DateTime>()) as OkObjectResult;
+            var result = await _controller.GetByDateAndCommodity(It.IsAny<DateTime>(), It.IsAny<int>()) as OkObjectResult;
 
-            _mockService.Verify(mock => mock.Get(It.IsAny<DateTime>()), Times.Once());
+            _mockService.Verify(mock => mock.Get(It.IsAny<DateTime>(), It.IsAny<int>()), Times.Once());
 
             Assert.AreEqual(((int)HttpStatusCode.OK), result.StatusCode);
         }

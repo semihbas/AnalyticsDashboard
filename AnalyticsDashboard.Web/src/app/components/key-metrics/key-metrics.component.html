@@ -1,36 +1,96 @@
 <mat-card>
 
-
   <div fxLayout="row" fxLayoutAlign="left" fxLayoutGap="10px">
-     
-      <mat-form-field fxFlex="20">
-          <mat-label>Select Commodity</mat-label>
-          <mat-select [(value)]="selectedCommodityId">
-              <mat-option *ngFor="let commodity of this.commodities" [value]="commodity.id"  (click)="commodityItemSelected(commodity.id)"> {{commodity.name}}
-              </mat-option>
 
-          </mat-select>
-      </mat-form-field>
+    <mat-form-field fxFlex="20">
+      <mat-label>From date</mat-label>
+      <input matInput [matDatepicker]="picker" [value]="selectedDateFrom"
+        (dateChange)="dateFromChanged('change', $event)">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field fxFlex="20">
+      <mat-label>Select Commodity</mat-label>
+      <mat-select [(value)]="selectedCommodityId">
+        <mat-option *ngFor="let commodity of this.commodities" [value]="commodity.id" (click)="commodityItemSelected()">
+          {{commodity.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
   </div>
 
 </mat-card>
 
 
-<mat-card>
-  <mat-card-title>Commodity PnL Daily</mat-card-title>
-  <mat-card-content *ngIf="chartSource">
-    <ngx-charts-line-chart
-    [view] ="[2000,800]"
-      [legend]="legend"
-      [showXAxisLabel]="showXAxisLabel"
-      [showYAxisLabel]="showYAxisLabel"
-      [xAxis]="xAxis"
-      [yAxis]="yAxis"
-      [xAxisLabel]="xAxisLabel"
-      [yAxisLabel]="yAxisLabel"
-      [timeline]="timeline"
-      [results]="chartSource"
-    ></ngx-charts-line-chart>
 
-  </mat-card-content>
-</mat-card>
+<mat-accordion>
+
+  <mat-expansion-panel [expanded]="true" *ngFor="let tradingModelTrade of this.tradingModelTrades">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{tradingModelTrade.tradingModel.name}}
+      </mat-panel-title>
+      <mat-panel-description>
+
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+
+    <div>
+      <table mat-table [dataSource]="tradingModelTrade.trades" matSort>
+
+        <ng-container matColumnDef="commodity">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Commodity </th>
+          <td mat-cell *matCellDef="let row"> {{row.commodity.name}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="tradingModel">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Model </th>
+          <td mat-cell *matCellDef="let row"> {{row.tradingModel.name}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="date">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
+          <td mat-cell *matCellDef="let row"> {{row.date | date: 'ddMMyyyy'}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="newTradeAction">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> New Trade Action </th>
+          <td mat-cell *matCellDef="let row"> {{row.newTradeAction}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="contract">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Contract </th>
+          <td mat-cell *matCellDef="let row"> {{row.contract}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="price">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Price </th>
+          <td mat-cell *matCellDef="let row"> {{row.price}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="position">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Position </th>
+          <td mat-cell *matCellDef="let row"> {{row.position}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="pnLDaily">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> PnL Daily </th>
+          <td mat-cell *matCellDef="let row"> {{row.pnLDaily}} </td>
+        </ng-container>
+       
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+      </table>
+
+      <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of actions"></mat-paginator>
+    </div>
+
+
+  </mat-expansion-panel>
+
+</mat-accordion>

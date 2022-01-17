@@ -9,6 +9,6 @@ namespace AnalyticsDashboard.Api.Service.Interface
     {
         Task<List<ChartSource>> Get(int commodityId);
         Task<List<TradeResponse>> Get(DateTime fromDate, int? commodityId, int? tradingModelId);
-        Task<List<ChartSource>> Get(DateTime fromDate);
+        Task<List<TradingModelTrades>> Get(DateTime fromDate, int commodityId);
     }
 }
